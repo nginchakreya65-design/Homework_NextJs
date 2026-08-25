@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 import { Navbar1 } from "@/components/ui/navbar1";
 import { Footer2 } from "@/components/ui/footer2";
+
+import Example from "@/components/errorhandlenodata";
+import EcommerceProductCard from "@/components/productcard/productCard";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,14 +26,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">
-        <Navbar1 />
-        {children}
-        <Footer2 />
+    <html lang="en">
+      <body suppressHydrationWarning>
+        <ErrorBoundary errorComponent={Example}>
+          <Navbar1 />
+          {children}
+          <Footer2 />
+        </ErrorBoundary>
       </body>
     </html>
   );
