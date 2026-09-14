@@ -18,7 +18,7 @@ const fetcher = async (url: string) => {
 
 export default function DataTableFetch() {
   const { data, error, isLoading } = useSWR<product[]>(
-    "https://api.escuelajs.co/api/v1/products",
+   "https://api.escuelajs.co/api/v0/products",
     fetcher,
   )
 
